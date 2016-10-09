@@ -19,6 +19,7 @@ class Main2Activity : AppCompatActivity() {
         val toolbar = findViewById(R.id.toolbar) as Toolbar
         setSupportActionBar(toolbar)
         setClickListener(View.OnClickListener { view ->
+            //intent跳转
             val i = Intent(this@Main2Activity, Main4Activity::class.java)
             startActivity(i)
         })
@@ -27,7 +28,7 @@ class Main2Activity : AppCompatActivity() {
         list!!.add("2")
         list!!.add("3")
         list!!.add("4")
-
+        //for循环
         for (i in list!!.asIterable()) {
             Log.i(i, i)
         }
@@ -35,7 +36,7 @@ class Main2Activity : AppCompatActivity() {
         for (j in 0..6) {
             Log.e("j", "" + j)
         }
-
+        //findViewById
         val fab = findViewById(R.id.fab) as FloatingActionButton
 //        fab.setOnClickListener({ view -> Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG).setAction("Action", null).show() })
         fab.setOnClickListener(listener)
@@ -43,6 +44,16 @@ class Main2Activity : AppCompatActivity() {
 
     fun setClickListener(listener: View.OnClickListener) {
         this.listener = listener
+    }
+
+    //swich
+    fun swich(i: Int): String? {
+        when (i) {
+            0 -> return "1"
+            1 -> return "2"
+            2 -> return "3"
+        }
+        return null
     }
 
 }
