@@ -7,6 +7,12 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
 import android.util.Log
 import android.view.View
+import com.example.tt.kotlindemo.R.id.fab
+import io.reactivex.Observable
+import io.reactivex.ObservableOnSubscribe
+import io.reactivex.functions.Function
+import io.reactivex.rxkotlin.subscribeBy
+import io.reactivex.rxkotlin.toObservable
 import java.util.*
 
 class Main2Activity : AppCompatActivity() {
@@ -17,6 +23,7 @@ class Main2Activity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main2)
         val toolbar = findViewById(R.id.toolbar) as Toolbar
+
         setSupportActionBar(toolbar)
         setClickListener(View.OnClickListener { view ->
             //intent跳转
@@ -36,6 +43,22 @@ class Main2Activity : AppCompatActivity() {
         for (j in 0..6) {
             Log.e("j", "" + j)
         }
+
+        val list = listOf("Alpha", "Beta", "Gamma", "Delta", "Epsilon")
+        list.toObservable() // extension function for Iterables
+                .filter { it.length >= 5 }
+                .subscribeBy(  // named arguments for lambda Subscribers
+                        onNext = { Log.e("tag", it) },
+                        onError =  { it.printStackTrace() },
+                        onComplete = { println("Done!") }
+                )
+        val tt: String = "xxxx"
+
+        Observable.just(tt)
+                .map { t: String? -> t!!.length }
+                .subscribeBy(onNext = {},onError = { println(it)},onComplete ={ println()})
+
+
         //findViewById
         val fab = findViewById(R.id.fab) as FloatingActionButton
 //        fab.setOnClickListener({ view -> Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG).setAction("Action", null).show() })
